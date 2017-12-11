@@ -58,5 +58,6 @@ freeline_project_description.json
 
 # Libaries and build artifacts
 node_modules/
+yarn.lock
 build/
 kotlin_build/
