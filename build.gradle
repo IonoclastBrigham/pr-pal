@@ -1,0 +1,41 @@
+buildscript {
+    ext.kotlin_version = '1.2.10'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+group 'com.ionoclast.prpal'
+version '1.0-SNAPSHOT'
+
+allprojects {
+    apply plugin: 'kotlin2js'
+    apply plugin: 'kotlin-dce-js'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    }
+
+    task copyAssets(type: Copy) {
+        from "assets/"
+        into "build/"
+    }
+
+    task bundleKotlin {
+        doLast {
+            def bundle = new File('build/bundle.js')
+            bundle.text = files('build/classes/kotlin/main/pr-pal.js',
+                    'build/classes/kotlin/main/dependencies/kotlin.js')
+                    .collect { it.text }
+                    .join("\n")
+        }
+    }
+}

@@ -12,7 +12,7 @@ package com.ionoclast.prpal
 
 
 fun main(args: Array<String>) {
-    // TODO: register callback for route change event?
+	// TODO: register callback for route change event?
 
-    redirectIfNeeded()
+	redirectIfNeeded()
 }
